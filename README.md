@@ -36,7 +36,7 @@ URL: http://localhost:4200
 
 Node.jsにて動作するサーバをローカル上で起動する。
 
-URL: http://localhost4300
+URL: http://localhost:4300
 
 ### 画面一覧
 
@@ -154,7 +154,7 @@ $ mpm start
 initialize datababse.
 ```
 
-最後に、ブラウザを起動し、http://localhost4300/create にアクセスします。
+最後に、ブラウザを起動し、http://localhost:4300/create にアクセスします。
 
 以下のようなメッセージが表示されればサーバの準備は完了です。
 
