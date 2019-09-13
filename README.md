@@ -53,6 +53,12 @@ URL: http://localhost:4300
 
 <div style="page-break-before:always"></div>
 
+## 画面設計書
+
+画面設計については、下記のサイトを参考にしてください。
+
+[書籍管理 外部設計](https://jsn-developer.github.io/bookmanagement-screen-design/)
+
 ## 課題一覧
 
 ### 問１：書籍の一覧処理の実装
