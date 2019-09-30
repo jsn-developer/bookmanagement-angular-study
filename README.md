@@ -57,7 +57,7 @@ URL: http://localhost:4300
 
 画面設計については、下記のサイトを参考にしてください。
 
-[書籍管理 外部設計](https://jsn-developer.github.io/bookmanagement-screen-design/)
+[書籍管理 画面設計](https://jsn-developer.github.io/bookmanagement-screen-design/)
 
 ## 課題一覧
 
