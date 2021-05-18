@@ -43,7 +43,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes), // RouterModule
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }), // RouterModule
     TooltipModule.forRoot(), // Bootstrapを使用
     FormsModule, // フォームを使用する
     ReactiveFormsModule, // リアクティブフォームの利用
