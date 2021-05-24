@@ -35,10 +35,10 @@ export class EditComponent implements OnInit {
   today: string;
 
   /** 登録者部署 */
-  updator: string;
+  updater: string;
 
   /** 更新者部署 */
-  updatorDepartment: string;
+  updaterDepartment: string;
 
   /**
    * コンストラクタ
@@ -52,10 +52,69 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+
+      // httpで取得する
+      this.http.get<BookModel>(HttpConst.url('/book/' + this.id), { headers: SessionManager.requestHeader() })
+        .subscribe(data => {
+          this.model = data;
+          this.model.id = this.id;
+        });
+    });
+    // 出版社一覧をセット
+    this.http.get<ListModel[]>(HttpConst.url('/list/publisher'),
+      { headers: SessionManager.requestHeader() })
+      .subscribe(result => {
+        this.publishers = result;
+      });
+
+    // 部署一覧をセット
+    this.http.get<ListModel[]>(HttpConst.url('/list/department'),
+      { headers: SessionManager.requestHeader() })
+      .subscribe(result => {
+        this.departments = result;
+
+        const loginUserDepart = SessionManager.loadDepartment();
+
+        // 自分の部署情報を取得
+        result.filter((row, i) => {
+          return row.id === loginUserDepart;
+        }).forEach((row, i) => {
+          this.updaterDepartment = row.label;
+        });
+      });
+    // httpで取得する
+    this.http.get<BookModel>(HttpConst.url('/book/' + this.id), { headers: SessionManager.requestHeader() })
+      .subscribe(data => {
+        this.model = data;
+        // 更新者情報
+        this.model.updater = SessionManager.loadUserName();
+      });
   }
 
   /**
    * 登録処理
    */
-  register() { }
+  register() {
+    if (confirm('登録します。よろしいですか？')) {
+      this.model.id = this.id;
+
+      this.submitted = true;
+
+      this.http.post(HttpConst.url('/book'),
+        this.model,
+        {headers: SessionManager.requestHeader()})
+        .subscribe(result => {
+          if (!result['result']) {
+            alert('サーバにてエラーが発生しました。');
+          } else {
+            alert ('登録に成功しました。');
+
+            const id = result['id'];
+            this.router.navigate(['/detail', id]);
+          }
+        });
+    }
+   }
 }
