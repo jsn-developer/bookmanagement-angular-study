@@ -34,6 +34,7 @@ export class ListComponent implements OnInit {
     });
 
     // 問１：検索完了時のイベントをバインドする
+    this.listService.searchCompleteSubject.subscribe(list => this.onSearchCompleted(list));
 
     // 条件なしで検索を行う
     this.listService.search(null);
