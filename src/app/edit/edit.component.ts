@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { BookModel } from '../../models/book';
+import { ListModel } from '../../models/listmodel';
+import { HttpClient } from '@angular/common/http';
+import { HttpConst } from '../../logic/http-const';
+import { SessionManager } from '../../logic/session-manager';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * 書籍情報更新コンポーネント
@@ -10,7 +16,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  // 問３：編集画面の実装
+  /** 編集する書籍のID(URLにて取得) */
+  id: string;
+
+  /** 表示・編集する書籍の情報 */
+  model: BookModel;
+
+  /** 画面に表示する出版社の情報 */
+  publishers: ListModel[];
+
+  /** 画面に表示する部署の一覧 */
+  departments: ListModel[];
+
+  /** 一度以上submit済 */
+  submitted = false;
+
+  /** 本日日付 */
+  today: string;
+
+  /** 登録者部署 */
+  updator: string;
+
+  /** 更新者部署 */
+  updatorDepartment: string;
+
+  /**
+   * コンストラクタ
+   * @param http HTTP通信を行うためのモジュール
+   * @param route ルート情報
+   * @param router ルーター情報
+   */
+   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
+    this.model = new BookModel();
+
+  }
 
   ngOnInit() {
   }
